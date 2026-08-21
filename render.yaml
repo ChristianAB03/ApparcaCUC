@@ -1,0 +1,26 @@
+# Render Blueprint para el backend de ApparcaCUC.
+# En Render: New → Blueprint → conecta este repo. Luego completa las
+# variables marcadas (MONGODB_URI, JWT_SECRET, CLIENT_URL) en el dashboard.
+services:
+  - type: web
+    name: apparcacuc-api
+    runtime: node
+    rootDir: apps/api
+    plan: free
+    region: oregon
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SEED_ON_START
+        value: "true"
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_URL
+        sync: false
