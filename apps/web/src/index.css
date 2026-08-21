@@ -1,0 +1,117 @@
+/* Self-hosted fonts (no external CDN) — Red Hat family per the CUC brand manual. */
+@import '@fontsource-variable/red-hat-display';
+@import '@fontsource-variable/red-hat-text';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── CUC institutional palette (from the brand manual) ── */
+    --brand: 163 22 26; /* #A3161A Auburn */
+    --brand-strong: 103 27 36; /* #671B24 (CUC gradient end) */
+    --brand-soft: 250 233 233; /* light red wash */
+    --gold: 201 162 39; /* #C9A227 Satin Sheen Gold */
+    --gold-bright: 252 209 22; /* #FCD116 Gold */
+    --forest: 7 137 48; /* #078930 Forest Green */
+
+    /* ── Neutrals ── */
+    --surface: 247 247 249;
+    --card: 255 255 255;
+    --ink: 26 25 25;
+    --ink-soft: 84 84 87;
+    --ink-muted: 142 142 147;
+    --line: 231 231 234;
+
+    /* ── Parking state (traffic-light using CUC colors) ── */
+    --st-available: 7 137 48; /* green */
+    --st-reserved: 201 162 39; /* gold */
+    --st-occupied: 163 22 26; /* red */
+    --st-disabled: 122 122 128; /* gray */
+  }
+
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background-color: rgb(var(--brand) / 0.18);
+  }
+
+  /* Consistent, accessible focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand/55 ring-offset-2 ring-offset-surface;
+  }
+
+  /* Slim, unobtrusive scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--ink-muted) / 0.4) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(var(--ink-muted) / 0.35);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-card shadow-card;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-line/70;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgb(255 255 255 / 0.65),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+
+  /* Subtle dotted grid used on marketing surfaces */
+  .bg-grid {
+    background-image: radial-gradient(rgb(var(--ink) / 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .brand-gradient {
+    background-image: linear-gradient(155deg, rgb(var(--brand)) 0%, rgb(var(--brand-strong)) 100%);
+  }
+}

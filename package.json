@@ -1,0 +1,25 @@
+{
+  "name": "apparcacuc",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ApparcaCUC — Smart Parking Management System (academic portfolio demo)",
+  "author": "Christian Álvarez",
+  "license": "MIT",
+  "scripts": {
+    "install:all": "npm --prefix apps/api install && npm --prefix apps/web install",
+    "dev": "concurrently -n api,web -c red,cyan \"npm --prefix apps/api run dev\" \"npm --prefix apps/web run dev\"",
+    "dev:api": "npm --prefix apps/api run dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "seed": "npm --prefix apps/api run seed",
+    "build": "npm run build:api && npm run build:web",
+    "build:api": "npm --prefix apps/api run build",
+    "build:web": "npm --prefix apps/web run build",
+    "start:api": "npm --prefix apps/api run start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}

@@ -1,0 +1,21 @@
+export const qk = {
+  overview: ['parking', 'overview'] as const,
+  spaces: (filters?: unknown) => ['parking', 'spaces', filters ?? {}] as const,
+  space: (id: string) => ['parking', 'space', id] as const,
+  reservations: (params?: unknown) => ['reservations', 'list', params ?? {}] as const,
+  activeReservation: ['reservations', 'active'] as const,
+  reservation: (id: string) => ['reservations', 'detail', id] as const,
+  vehicles: ['vehicles'] as const,
+  notifications: ['notifications'] as const,
+  unread: ['notifications', 'unread'] as const,
+  tickets: ['support', 'mine'] as const,
+  admin: {
+    overview: ['admin', 'overview'] as const,
+    spaces: ['admin', 'spaces'] as const,
+    reservations: (params?: unknown) => ['admin', 'reservations', params ?? {}] as const,
+    users: ['admin', 'users'] as const,
+    tickets: (params?: unknown) => ['admin', 'tickets', params ?? {}] as const,
+    stats: ['admin', 'stats'] as const,
+    audit: ['admin', 'audit'] as const,
+  },
+};
